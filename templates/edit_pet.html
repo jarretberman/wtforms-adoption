@@ -1,0 +1,43 @@
+{%extends 'base.html'%}
+
+{%block content%}
+<div class="container">
+    <div class="row">
+        <div class="card col-md-3">
+            <img src="{{pet.photo_url}}" class="card-img-top" alt="...">
+            <div class="card-body">
+            <h5 class="card-title">{{pet.name}}</h5>
+            <p>Age: {{pet.age}}</p>
+            <p>Species: {{pet.species}}</p>
+            <p class="card-text">{{pet.notes}}</p> 
+                
+        </div>
+    </div>
+    
+    <form id="petform" method="POST" class = 'col-md-9'>
+        <h4>Edit Pet</h4>
+        {{ form.hidden_tag() }}
+        <!--add type=hidden form fields -->
+
+        {% for field in form
+           if field.widget.input_type != 'hidden' %}
+
+        <div class="form-group">
+            {{ field.label }}
+            {{ field(class='form-control') }}
+
+            {% for error in field.errors %}
+            <small class='form-text text-danger'> {{ error }}</small>
+            {% endfor %}
+        </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+    </div>
+</div>
+
+
+<button type="submit">Submit</button>
+</form>
+
+{%endblock%}

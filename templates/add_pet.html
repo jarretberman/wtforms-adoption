@@ -1,0 +1,28 @@
+{%extends 'base.html'%}
+
+{%block content%}
+<div class="container">
+    <h4 class="text-center">Add Pet</h4>
+    <div class="row justify-content-center">
+
+        <form id="petform" method="POST" class = 'col-md-5'>
+            {{ form.hidden_tag() }}
+            <!--add type=hidden form fields -->
+
+            {% for field in form
+       if field.widget.input_type != 'hidden' %}
+
+            <div class="form-group">
+                {{ field.label }}
+                {{ field(class='form-control') }}
+
+                {% for error in field.errors %}
+                <small class='form-text text-danger'> {{ error }}</small>
+                {% endfor %}
+            </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+{%endblock%}

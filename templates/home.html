@@ -1,0 +1,18 @@
+{%extends 'base.html'%}
+
+{%block content%}
+<div class="container"><div class="row">
+{%for pet in pets%}
+<div class="card col-md-4 col-sm-6">
+    <img src="{{pet.photo_url}}" class="card-img-top" alt="...">
+    <div class="card-body">
+    <h5 class="card-title">{{pet.name}} {%if pet.available == True%}<span class="badge badge-success">Available</span>{%endif%}</h5>
+    <p>Age: {{pet.age}}</p>
+    <p>Species: {{pet.species}}</p>
+    <p class="card-text">{{pet.notes}}</p>
+    <a href="/pets/{{pet.id}}" class="btn btn-primary">edit</a> {%if pet.available == True%} <form action="/pets/{{pet.id}}/adopt" method="post"><input type = 'submit' class="btn btn-success" value='Adopt'></form>{%else%}<form action="/pets/{{pet.id}}/delete" method="post"><input type = 'submit' class="btn btn-warning" value='Remove'></form> {%endif%}    
+</div>
+
+</div>
+{%endfor%}</div>
+{%endblock%}
